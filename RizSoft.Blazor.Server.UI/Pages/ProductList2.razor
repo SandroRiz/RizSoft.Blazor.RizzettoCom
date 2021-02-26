@@ -1,0 +1,30 @@
+﻿@page "/productlist2"
+@using Models
+@using Services
+
+@inherits ProductList2Base;
+
+
+<h2>Product Data Grid with DataAsync</h2>
+
+<p class="pb-2 pt-2">
+    The grid is bound directly with DataAsync. 
+</p>
+
+@if (Categories == null)
+{
+<p><em>Loading...</em></p>
+}
+else
+{
+<DxDataGrid DataAsync="@LoadDataAsync" 
+ShowFilterRow="true">
+    <DxDataGridColumn Caption="Id" Field="@nameof(Product.ProductId)" />
+    <DxDataGridColumn Caption="Name" Field="@nameof(Product.ProductName)" />
+    <DxDataGridComboBoxColumn Caption="Category" Data="@Categories"
+Field="CategoryId" TextFieldName="CategoryName" ValueFieldName="CategoryId" />
+    <DxDataGridColumn Caption="Price" Field="@nameof(Product.Price)" />
+</DxDataGrid>
+
+}
+

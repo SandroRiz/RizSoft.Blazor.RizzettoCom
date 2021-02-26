@@ -1,0 +1,38 @@
+﻿{
+   "CodeGenerationMode": 0,
+   "ContextClassName": "DDEVRizRizsoftBlazorRizsoftBlazorServerUIDataAcmeDbContext",
+   "ContextNamespace": "Data",
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": "Models",
+   "OutputContextPath": "Data",
+   "OutputPath": "Models",
+   "ProjectRootNamespace": "RizSoft.Blazor",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 0,
+   "Tables": [
+      {
+         "Name": "Categories",
+         "ObjectType": 0
+      },
+      {
+         "Name": "Products",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": "D:\\DEV\\Riz\\RizSoft.Blazor\\RizSoft.Blazor.Server.UI\\Data\\Acme.db",
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": false,
+   "UseDbContextSplitting": false,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseInflector": true,
+   "UseLegacyPluralizer": false,
+   "UseNoConstructor": false,
+   "UseNoNavigations": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UseSpatial": false
+}

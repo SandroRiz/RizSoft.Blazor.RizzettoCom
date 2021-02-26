@@ -1,0 +1,196 @@
+﻿@page "/pagedimension"
+@using Services
+@inject BrowserService BrowserSvc
+
+@inject IJSRuntime JSRuntime
+
+<h1>Page Dimension</h1>
+
+
+<p>Resize this pane/window to see the result. <small class="text-muted">Sizes are according to <a href="https://getbootstrap.com/docs/4.1/layout/grid/#grid-options">bootstrap 4 docs</a> (unless customized).</small></p>
+
+<p>
+    Compact version. <small class="text-muted">(for adding it temporarily to header of a page for testing purposes.)</small>
+    <span class="badge badge-warning d-inline-block d-sm-none">XS</span>
+    <span class="badge badge-warning d-none d-sm-inline-block d-md-none">SM</span>
+    <span class="badge badge-warning d-none d-md-inline-block d-lg-none">MD</span>
+    <span class="badge badge-warning d-none d-lg-inline-block d-xl-none">LG</span>
+    <span class="badge badge-warning d-none d-xl-inline-block">XL</span>
+</p>
+
+
+
+
+<div class="row no-gutters text-center text-muted px-5">
+    <div class="col py-2 bg-light d-none d-sm-block">XS</div>
+    <div class="col py-2 bg-primary text-white d-block d-sm-none">XS</div>
+
+    <div class="col py-2 bg-light d-block d-sm-none d-md-block">SM</div>
+    <div class="col py-2 bg-primary text-white d-none d-sm-block d-md-none">SM</div>
+
+    <div class="col py-2 bg-light d-block d-md-none d-lg-block">MD</div>
+    <div class="col py-2 bg-primary text-white d-none d-md-block d-lg-none">MD</div>
+
+    <div class="col py-2 bg-light d-block d-lg-none d-xl-block">LG</div>
+    <div class="col py-2 bg-primary text-white d-none d-lg-block d-xl-none">LG</div>
+
+    <div class="col py-2 bg-light d-block d-xl-none">XL</div>
+    <div class="col py-2 bg-primary text-white d-none d-xl-block">XL</div>
+
+    <div class="w-100 mb-2"></div>
+    <div class="col">0px+</div>
+    <div class="col">540px+</div>
+    <div class="col">720px+</div>
+    <div class="col">960px+</div>
+    <div class="col">1140px+</div>
+</div>
+
+<div id="winDimension" class="mt-5 mb-5"></div>
+
+<table class="table">
+    <thead class="thead-dark">
+
+        <tr>
+            <th scope="col">
+                <strong>Device</strong>
+            </th>
+            <th scope="col">
+                <strong>Orientation</strong>
+            </th>
+            <th scope="col">
+                <strong>WxH</strong>
+            </th>
+            <th scope="col">
+                <strong>Breakpoint</strong>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+            PC Desktop FHD
+        </td>
+        <td>
+            Landscape
+        </td>
+        <td>
+            1904 x 960
+        </td>
+        <td>
+            XL
+        </td>
+    </tr>
+    <tr>
+        <td>
+            PC Desktop Low
+        </td>
+        <td>
+            Landscape
+        </td>
+        <td>
+            1350 x 648
+        </td>
+        <td>
+            XL
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Old Ipad
+        </td>
+        <td>
+            Landscape
+        </td>
+        <td>
+            1024 x 768
+        </td>
+        <td>
+            LG
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Tablet Samsung A6
+        </td>
+        <td>
+            Landscape
+        </td>
+        <td>
+            1280 x 680
+        </td>
+        <td>
+            XL
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Tablet Samsung A6
+        </td>
+        <td>
+            Portrait
+        </td>
+        <td>
+            800 x 1160
+        </td>
+        <td>
+            MD
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Phone Samsung S8
+        </td>
+        <td>
+            Landcape
+        </td>
+        <td>
+            692 x 336
+        </td>
+        <td>
+            SM
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Phone Samsung S8
+        </td>
+        <td>
+            Portrait
+        </td>
+        <td>
+            360 x 612
+        </td>
+        <td>
+            XS
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+@code {
+    public int InnerHeight { get; set; }
+    public int InnerWidth { get; set; }
+
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JSRuntime.InvokeVoidAsync("displayWindowSize");
+        }
+    }
+
+    async Task GetDimensions()
+    {
+        var dimension = await BrowserSvc.GetDimensions();
+        InnerHeight = dimension.Height;
+        InnerWidth = dimension.Width;
+
+
+
+
+
+    }
+
+
+}

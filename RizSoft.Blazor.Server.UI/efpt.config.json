@@ -1,6 +1,6 @@
 ﻿{
    "CodeGenerationMode": 0,
-   "ContextClassName": "DDEVRizRizsoftBlazorRizsoftBlazorServerUIDataAcmeDbContext",
+   "ContextClassName": "AcmeDbContext",
    "ContextNamespace": "Data",
    "DefaultDacpacSchema": null,
    "FilterSchemas": false,
@@ -22,7 +22,7 @@
          "ObjectType": 0
       }
    ],
-   "UiHint": "D:\\DEV\\Riz\\RizSoft.Blazor\\RizSoft.Blazor.Server.UI\\Data\\Acme.db",
+   "UiHint": "D:\\DEV\\Riz\\RizSoft.Blazor\\RizSoft.Blazor.Server.UI\\Db\\Acme.db",
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": false,
    "UseDbContextSplitting": false,

@@ -6,14 +6,20 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RizSoft.Blazor.Data;
 using RizSoft.Blazor.Services;
+using System;
+using System.IO;
 
 namespace RizSoft.Blazor.Server.UI
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+
+        private readonly IWebHostEnvironment WebHostingEnvironment;
+
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
+            WebHostingEnvironment = env;
         }
 
         public IConfiguration Configuration { get; }
@@ -25,7 +31,11 @@ namespace RizSoft.Blazor.Server.UI
             services.AddRazorPages();
             services.AddServerSideBlazor();
 
-            services.AddDbContext<AcmeDbContext>(options => options.UseSqlite(Configuration.GetConnectionString("AcmeDb")), ServiceLifetime.Transient);
+            if (Configuration["DbToUse"].ToLower() == "sqlite")
+                 services.AddDbContext<AcmeDbContext>(options => options.UseSqlite(Configuration.GetConnectionString("AcmeDbSqlite").Replace("$", WebHostingEnvironment.ContentRootPath)), ServiceLifetime.Transient);
+            else
+                services.AddDbContext<AcmeDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AcmeDbSqlServer")), ServiceLifetime.Transient);
+
 
             services.AddSingleton<WeatherForecastService>();
             services.AddTransient<IProductService, ProductService>();
@@ -48,6 +58,8 @@ namespace RizSoft.Blazor.Server.UI
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
